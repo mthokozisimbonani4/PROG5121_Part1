@@ -59,6 +59,11 @@ public class Login {
         return hasCapitalLetter && hasNumber && hasSpecialCharacter;
     }
 
+    /*
+    * Regular expression reference:
+    * Oracle (2026). Pattern (Java Platform SE API).
+    * Used as a reference for Java regular expression pattern matching.
+    */
     // Checks if the South African cellphone number is correctly formatted
     public Boolean checkCellPhoneNumber() {
         if (cellPhoneNumber == null) {
