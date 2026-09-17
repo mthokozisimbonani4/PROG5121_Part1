@@ -4,6 +4,13 @@
 package com.mycompany.prog5121_part1;
 
 import java.util.Scanner;
+/**
+ * Main program for PROG5121 Part 1.
+ * This program allows a user to register and then log in
+ * using the details provided during registration.
+ *
+ * @author Mthokozisi
+ */
 
 public class PROG5121_Part1 {
 
