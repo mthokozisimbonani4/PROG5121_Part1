@@ -124,4 +124,48 @@ public class LoginTest {
 
         assertFalse(user.loginUser());
     }
+    
+// Tests the registration messages for correct details
+@Test
+public void testCorrectRegistrationMessages() {
+
+    Login user = new Login(
+            "Kyle",
+            "Smith",
+            "kyl_1",
+            "Ch&&sec@ke99!",
+            "+27838968976"
+    );
+
+    String expected = "Username successfully captured.\n"
+            + "Password successfully captured.\n"
+            + "Cell phone number successfully added.";
+
+    assertEquals(expected, user.registerUser());
+}
+
+// Tests the registration messages for incorrect details
+@Test
+public void testIncorrectRegistrationMessages() {
+
+    Login user = new Login(
+            "Kyle",
+            "Smith",
+            "kyle!!!!!!!",
+            "password",
+            "08966553"
+    );
+
+    String expected = "Username is not correctly formatted; please ensure "
+            + "that your username contains an underscore and is no "
+            + "more than five characters in length.\n"
+            + "Password is not correctly formatted; please ensure "
+            + "that the password contains at least eight characters, "
+            + "a capital letter, a number and a special character.\n"
+            + "Cell phone number incorrectly formatted or does not "
+            + "contain international code.";
+
+    assertEquals(expected, user.registerUser());
+    }
+
 }
