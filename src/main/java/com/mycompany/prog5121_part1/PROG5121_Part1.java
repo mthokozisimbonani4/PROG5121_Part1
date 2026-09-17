@@ -66,7 +66,10 @@ public class PROG5121_Part1 {
             System.out.println();
             System.out.println(user.returnLoginStatus());
         }
-
+        
+        System.out.println();
+        System.out.println("Thank you for using the registration and login system.");
+        
         input.close();
     }
 }
