@@ -3,6 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.prog5121_part1;
+/**
+ * The Login class handles user registration and login.
+ * It checks the username, password and South African cellphone number
+ * to make sure that they meet the required format.
+ *
+ * @author Mthokozisi
+ */
 
 public class Login {
 
