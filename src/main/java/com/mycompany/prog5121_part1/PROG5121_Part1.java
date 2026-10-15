@@ -126,7 +126,7 @@ public class PROG5121_Part1 {
 
         // Continue only if both checks pass
         if (recipientResult.equals(
-                "Cell phone number successfully added.")
+                "Cell phone number successfully captured.")
                 && lengthResult.equals("Message ready to send.")
                 && message.checkMessageID()
                 && !messageText.trim().isEmpty()) {
