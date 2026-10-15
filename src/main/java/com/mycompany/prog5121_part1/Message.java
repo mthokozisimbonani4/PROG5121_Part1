@@ -53,9 +53,9 @@ private static HashSet<String> usedIDs = new HashSet<>();
     public String checkRecipientCell() {
 
         if (recipient != null && recipient.matches("^\\+27[0-9]{9}$")) {
-            return "Cell phone number successfully added.";
+            return "Cell phone number successfully captured.";
         } else {
-            return "Cell phone number incorrectly formatted or does not contain international code.";
+            return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.";
         }
     }
     
