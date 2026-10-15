@@ -124,71 +124,51 @@ public class PROG5121_Part1 {
         System.out.println(recipientResult);
         System.out.println(lengthResult);
 
-        // Continue only if both checks pass
-        if (recipientResult.equals(
+        // Invalid messages can be discarded, but never sent or stored.
+        boolean validMessage = recipientResult.equals(
                 "Cell phone number successfully captured.")
                 && lengthResult.equals("Message ready to send.")
                 && message.checkMessageID()
-                && !messageText.trim().isEmpty()) {
+                && !messageText.trim().isEmpty();
 
-            // Generate the message hash
-            String hash = message.createMessageHash();
-
+        String hash = "";
+        if (validMessage) {
+            hash = message.createMessageHash();
             System.out.println();
             System.out.println("Message ID: " + messageID);
             System.out.println("Message Hash: " + hash);
-
-            // Let the user choose what to do
-            System.out.println();
-            System.out.println("1. Send Message");
-            System.out.println("2. Disregard Message");
-            System.out.println("3. Store Message");
-
-            System.out.print("Choose an option: ");
-            int messageChoice =
-                    readNumber(input, false);
-
-            if (messageChoice == 1) {
-
-                // Send the message
-                System.out.println(
-                        message.SentMessage(1)
-                );
-
-                // Display the complete message
-                System.out.println();
-                System.out.println("Message ID: " + messageID);
-                System.out.println("Message Hash: " + hash);
-                System.out.println("Recipient: " + recipient);
-                System.out.println("Message: " + messageText);
-
-            } else if (messageChoice == 2) {
-
-                System.out.println(message.SentMessage(2));
-
-                System.out.print("Enter 0 to delete: ");
-                String deleteChoice = input.nextLine();
-
-                if (deleteChoice.equals("0")) {
-                    System.out.println("Message disregarded.");
-                }
-
-            
-    } else if (messageChoice == 3) {
-
-    // Store the message in a JSON file
-    System.out.println(message.storeMessage());
-
-            } else {
-
-                System.out.println("Invalid option selected.");
-            }
-
         } else {
+            System.out.println("Message cannot be sent or stored until valid.");
+        }
 
-            System.out.println(
-                    "Message could not be processed."
-            );
+        // Show actions even if the recipient is invalid, so Discard remains available.
+        System.out.println();
+        System.out.println("1. Send Message");
+        System.out.println("2. Disregard Message");
+        System.out.println("3. Store Message");
+        System.out.print("Choose an option: ");
+        int messageChoice = readNumber(input, false);
+
+        if (messageChoice == 2) {
+            System.out.println(message.SentMessage(2));
+            System.out.print("Enter 0 to delete: ");
+            String deleteChoice = input.nextLine();
+            if (deleteChoice.equals("0")) {
+                System.out.println("Message disregarded.");
+            }
+        } else if (!validMessage && (messageChoice == 1 || messageChoice == 3)) {
+            System.out.println("Message could not be processed.");
+        } else if (messageChoice == 1) {
+            System.out.println(message.SentMessage(1));
+            System.out.println();
+            System.out.println("Message ID: " + messageID);
+            System.out.println("Message Hash: " + hash);
+            System.out.println("Recipient: " + recipient);
+            System.out.println("Message: " + messageText);
+        } else if (messageChoice == 3) {
+            System.out.println(message.storeMessage());
+        } else {
+            System.out.println("Invalid option selected.");
         }
     }
 
