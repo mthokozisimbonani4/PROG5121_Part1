@@ -26,7 +26,7 @@ public class MessageTest {
     public void testValidRecipient() {
         Message message = new Message("0012345678", 0,
                 "+27718693002", "Hi Mike");
-        assertEquals("Cell phone number successfully added.",
+        assertEquals("Cell phone number successfully captured.",
                 message.checkRecipientCell());
     }
 
@@ -34,7 +34,7 @@ public class MessageTest {
     public void testInvalidRecipient() {
         Message message = new Message("0012345678", 0,
                 "08575975889", "Hi Keegan, did you receive the payment?");
-        assertEquals("Cell phone number incorrectly formatted or does not contain international code.",
+        assertEquals("Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.",
                 message.checkRecipientCell());
     }
 
@@ -80,5 +80,43 @@ public class MessageTest {
         Message message = new Message("0012345678", 0,
                 "+27718693002", "Hi Mike");
         assertEquals("Message successfully stored.", message.SentMessage(3));
+    }
+
+    @Test
+    public void testGeneratedMessageID() {
+        String id = Message.generateMessageID();
+        assertEquals(10, id.length());
+        assertTrue(id.matches("[0-9]{10}"));
+    }
+
+    @Test
+    public void testGeneratedIDsAreDifferent() {
+        String first = Message.generateMessageID();
+        String second = Message.generateMessageID();
+        assertNotEquals(first, second);
+    }
+
+    @Test
+    public void testOtherMessageHashes() {
+        String[] texts = {
+            "Hello, how are you today!",
+            "Thanks for your help."
+        };
+        String[] expected = {
+            "12:1:HELLOTODAY",
+            "12:2:THANKSHELP"
+        };
+        for (int i = 0; i < texts.length; i++) {
+            Message message = new Message("1234567890", i + 1,
+                    "+27718693002", texts[i]);
+            assertEquals(expected[i], message.createMessageHash());
+        }
+    }
+
+    @Test
+    public void testMessageLengthBoundary() {
+        Message message = new Message("1234567890", 1,
+                "+27718693002", "A".repeat(250));
+        assertEquals("Message ready to send.", message.checkMessageLength());
     }
 }
