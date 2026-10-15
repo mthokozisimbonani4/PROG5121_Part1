@@ -67,6 +67,7 @@ public class PROG5121_Part1 {
 
                 // Counts how many messages have been created
                 int messagesEntered = 0;
+                Message lastMessage = null;
                 int choice = 0;
 
                 // Keep showing the menu until the user quits
@@ -112,6 +113,7 @@ public class PROG5121_Part1 {
                 recipient,
                 messageText
         );
+        lastMessage = message;
 
         // Validate the recipient
         String recipientResult = message.checkRecipientCell();
@@ -196,6 +198,11 @@ public class PROG5121_Part1 {
 
                     } else if (choice == 3) {
 
+                        int totalSent = 0;
+                        if (lastMessage != null) {
+                            totalSent = lastMessage.returnTotalMessagess();
+                        }
+                        System.out.println("Total messages sent: " + totalSent);
                         System.out.println("Thank you for using QuickChat.");
 
                     } else {
