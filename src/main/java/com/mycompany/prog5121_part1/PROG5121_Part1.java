@@ -63,7 +63,7 @@ public class PROG5121_Part1 {
 
                 // Ask how many messages the user wants to send
                 System.out.print("How many messages would you like to enter? ");
-                int maxMessages = Integer.parseInt(input.nextLine());
+                int maxMessages = readNumber(input, true);
 
                 // Counts how many messages have been created
                 int messagesEntered = 0;
@@ -80,7 +80,7 @@ public class PROG5121_Part1 {
                     System.out.println("3. Quit");
 
                     System.out.print("Choose an option: ");
-                    choice = Integer.parseInt(input.nextLine());
+                    choice = readNumber(input, false);
 
                     
     if (choice == 1) {
@@ -146,7 +146,7 @@ public class PROG5121_Part1 {
 
             System.out.print("Choose an option: ");
             int messageChoice =
-                    Integer.parseInt(input.nextLine());
+                    readNumber(input, false);
 
             if (messageChoice == 1) {
 
@@ -215,4 +215,21 @@ public class PROG5121_Part1 {
 
         input.close();
     }
+    // Reads a number without crashing if the user types letters
+    private static int readNumber(Scanner input, boolean mustBePositive) {
+        while (true) {
+            String answer = input.nextLine().trim();
+
+            try {
+                int number = Integer.parseInt(answer);
+                if (!mustBePositive || number > 0) {
+                    return number;
+                }
+                System.out.print("Please enter a number greater than zero: ");
+            } catch (NumberFormatException e) {
+                System.out.print("Please enter a valid whole number: ");
+            }
+        }
+    }
+
 }
