@@ -25,4 +25,4 @@ jobs:
           cache: maven
 
       - name: Run Maven unit tests
-        run: mvn --batch-mode clean test
+        run: mvn --batch-mode test
